@@ -56,6 +56,39 @@ public class Courses {
 
         return max;
     }// bestGrade
+    public double average(){
+        if(this.students.isEmpty()){
+            return 0;
+        }
+        double sum = 0;
+        for(Student s : this.students){
+            sum += s.grade;
+        }
+        return sum / this.students.size();
+    }// average
+    public void ranking(){
+        ArrayList<Student> sorted = new ArrayList<>(this.students);
+        sorted.sort((a, b) -> b.grade - a.grade);
+
+        System.out.println("\n--- Ranking " + this.courseName + " ---");
+        int pos = 1;
+        for(Student s : sorted){
+            System.out.println(pos + ". " + s.firstName + " " + s.lastName + " - " + s.grade);
+            pos++;
+        }
+    }
+
+    public void isAboveAverage(){
+        double avg = average();
+        System.out.println("\n--- Promedio: " + avg + " ---");
+        for(Student s : this.students){
+            if(s.grade > avg){
+                System.out.println(s.firstName + " - " + s.grade + " -> ENCIMA");
+            } else {
+                System.out.println(s.firstName + " - " + s.grade + " -> debajo");
+            }
+        }
+    }
 
 
 
